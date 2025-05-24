@@ -1,0 +1,139 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 41.739129329073258,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 911.6087530444014,
+            "y": 252.95041191645265
+          },
+          "nodeIndex": "classicmodels customers",
+          "nodeLineageTag": "4eb0105b-0e88-4472-bdb4-0c2e0bb4693d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1045.6635480783,
+            "y": 606.26912265458634
+          },
+          "nodeIndex": "classicmodels employees",
+          "nodeLineageTag": "bfc05549-8ecb-42dc-9b1c-ed9fe3f0971f",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1333.7966373974382,
+            "y": 257.29940738234632
+          },
+          "nodeIndex": "classicmodels offices",
+          "nodeLineageTag": "ff51b7a6-bab6-4405-9626-4318d62fb6d2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 624.179854341377,
+            "y": 285.12930709979628
+          },
+          "nodeIndex": "classicmodels orderdetails",
+          "nodeLineageTag": "4264785d-692e-4eb8-8165-fe13e1fa6637",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 685.40698473447367,
+            "y": -50
+          },
+          "nodeIndex": "classicmodels orders",
+          "nodeLineageTag": "b892d34d-8b84-43a1-b307-14b653031de5",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1082.9549016960013,
+            "y": 20.961453488490406
+          },
+          "nodeIndex": "classicmodels payments",
+          "nodeLineageTag": "32dc1e7d-f2b0-4df2-9fa2-bb5d684152d8",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 280.9740577316395
+          },
+          "nodeIndex": "classicmodels productlines",
+          "nodeLineageTag": "9ddb5f0d-ed25-4fa8-a515-8df1715998a9",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 337.06976910026629,
+            "y": 214.81240743276783
+          },
+          "nodeIndex": "classicmodels products",
+          "nodeLineageTag": "c7057f12-5edc-4417-b7c0-4c9d11d8d680",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1567.7966373974382,
+            "y": 314.13456132729317
+          },
+          "nodeIndex": "Orders",
+          "nodeLineageTag": "20375cf2-38f5-4711-b482-2ec05463b02b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 69,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

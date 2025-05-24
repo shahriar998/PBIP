@@ -1,0 +1,67 @@
+table 'classicmodels orderdetails'
+	lineageTag: 4264785d-692e-4eb8-8165-fe13e1fa6637
+
+	column orderNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: adde57d3-8660-4783-9e6a-fde3946b6906
+		summarizeBy: none
+		sourceColumn: orderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column productCode
+		dataType: string
+		lineageTag: 4889b2d0-d43e-4ef0-987a-70db20a41b1d
+		summarizeBy: none
+		sourceColumn: productCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantityOrdered
+		dataType: int64
+		formatString: 0
+		lineageTag: 404d7bec-d0b7-4ac3-950b-e995cf79dd35
+		summarizeBy: sum
+		sourceColumn: quantityOrdered
+
+		annotation SummarizationSetBy = Automatic
+
+	column priceEach
+		dataType: double
+		lineageTag: 8adab6df-0044-495a-9785-958db9efb7f3
+		summarizeBy: sum
+		sourceColumn: priceEach
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column orderLineNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 55c45be3-58c4-4258-af1b-b888dfb4768d
+		summarizeBy: sum
+		sourceColumn: orderLineNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue = 'classicmodels orderdetails'[quantityOrdered] * 'classicmodels orderdetails'[priceEach]
+		lineageTag: 21ef6ddf-188c-401c-9038-6ad4756c94a6
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'classicmodels orderdetails' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1:3306", "classicmodels", [ReturnSingleDatabase=true]),
+				    classicmodels_orderdetails = Source{[Schema="classicmodels",Item="orderdetails"]}[Data]
+				in
+				    classicmodels_orderdetails
+
+	annotation PBI_ResultType = Table
+

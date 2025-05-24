@@ -1,0 +1,55 @@
+table 'classicmodels payments'
+	lineageTag: 32dc1e7d-f2b0-4df2-9fa2-bb5d684152d8
+
+	column checkNumber
+		dataType: string
+		lineageTag: 43c3d797-dc2c-4d19-ba5c-ba66a078ed73
+		summarizeBy: none
+		sourceColumn: checkNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column paymentDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5fefce79-4d1d-44f1-bafe-9f429107d917
+		summarizeBy: none
+		sourceColumn: paymentDate
+
+		variation Variation
+			isDefault
+			relationship: 4e7e01bd-8eff-443d-85ab-24fd74941ed2
+			defaultHierarchy: LocalDateTable_b486222e-dcab-4769-9c62-6a65ad5f4874.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: double
+		lineageTag: f758108c-34fd-47ae-9c8e-fa6afc7d0e50
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column customerNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c74c197-d3f3-4065-87ca-a62cc4bfab4c
+		summarizeBy: none
+		sourceColumn: customerNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'classicmodels payments' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1:3306", "classicmodels", [ReturnSingleDatabase=true]),
+				    classicmodels_payments = Source{[Schema="classicmodels",Item="payments"]}[Data]
+				in
+				    classicmodels_payments
+
+	annotation PBI_ResultType = Table
+

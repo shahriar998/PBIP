@@ -1,0 +1,80 @@
+table 'classicmodels employees'
+	lineageTag: bfc05549-8ecb-42dc-9b1c-ed9fe3f0971f
+
+	column employeeNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 5035b5e7-35ee-42b5-b104-e05c47865442
+		summarizeBy: none
+		sourceColumn: employeeNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column lastName
+		dataType: string
+		lineageTag: 9e13fa46-1e16-404f-8516-c97b426cd58f
+		summarizeBy: none
+		sourceColumn: lastName
+
+		annotation SummarizationSetBy = Automatic
+
+	column firstName
+		dataType: string
+		lineageTag: a8da9a2f-2264-4a2b-b1ab-b0deff7c04d3
+		summarizeBy: none
+		sourceColumn: firstName
+
+		annotation SummarizationSetBy = Automatic
+
+	column extension
+		dataType: string
+		lineageTag: 09717fde-023e-4bfb-b8d9-2073b951aa2f
+		summarizeBy: none
+		sourceColumn: extension
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 855fb389-b871-46bf-a3e1-c37f644200a8
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column reportsTo
+		dataType: int64
+		formatString: 0
+		lineageTag: b795cd73-dd25-4257-8980-7292e7d421b9
+		summarizeBy: sum
+		sourceColumn: reportsTo
+
+		annotation SummarizationSetBy = Automatic
+
+	column jobTitle
+		dataType: string
+		lineageTag: 56ea9942-7d2a-412f-9425-9b5abb11f441
+		summarizeBy: none
+		sourceColumn: jobTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column officeCode
+		dataType: string
+		lineageTag: 867349c6-4b85-4d24-93a5-3c7fa7b43618
+		summarizeBy: none
+		sourceColumn: officeCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'classicmodels employees' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1:3306", "classicmodels", [ReturnSingleDatabase=true]),
+				    classicmodels_employees = Source{[Schema="classicmodels",Item="employees"]}[Data]
+				in
+				    classicmodels_employees
+
+	annotation PBI_ResultType = Table
+

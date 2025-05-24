@@ -1,0 +1,91 @@
+table 'classicmodels products'
+	lineageTag: c7057f12-5edc-4417-b7c0-4c9d11d8d680
+
+	column productCode
+		dataType: string
+		lineageTag: 231c7e16-b0db-4a43-a11d-cd28d367e67e
+		summarizeBy: none
+		sourceColumn: productCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column productName
+		dataType: string
+		lineageTag: 0ef01a24-32d3-4bd7-b2a4-8314f115a219
+		summarizeBy: none
+		sourceColumn: productName
+
+		annotation SummarizationSetBy = Automatic
+
+	column productScale
+		dataType: string
+		lineageTag: dc9082fd-ec01-4ee9-9166-84af36a6f29c
+		summarizeBy: none
+		sourceColumn: productScale
+
+		annotation SummarizationSetBy = Automatic
+
+	column productVendor
+		dataType: string
+		lineageTag: f8ebb8c4-5373-47e0-8423-d59215c20e1f
+		summarizeBy: none
+		sourceColumn: productVendor
+
+		annotation SummarizationSetBy = Automatic
+
+	column productDescription
+		dataType: string
+		lineageTag: b86c9ab3-8d2a-4868-a1bd-e1a635cb61c6
+		summarizeBy: none
+		sourceColumn: productDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantityInStock
+		dataType: int64
+		formatString: 0
+		lineageTag: ba59fe3e-3485-4b2e-8a56-78635f90ec3a
+		summarizeBy: sum
+		sourceColumn: quantityInStock
+
+		annotation SummarizationSetBy = Automatic
+
+	column buyPrice
+		dataType: double
+		lineageTag: aa837ddd-73d4-4b8a-98e8-dfb2386211a8
+		summarizeBy: sum
+		sourceColumn: buyPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MSRP
+		dataType: double
+		lineageTag: c4f0970c-d36f-4c54-83f7-5f2e585ea176
+		summarizeBy: sum
+		sourceColumn: MSRP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column productLine
+		dataType: string
+		lineageTag: f560c72b-2310-4457-9ad6-26d06265715b
+		summarizeBy: none
+		sourceColumn: productLine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'classicmodels products' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1:3306", "classicmodels", [ReturnSingleDatabase=true]),
+				    classicmodels_products = Source{[Schema="classicmodels",Item="products"]}[Data]
+				in
+				    classicmodels_products
+
+	annotation PBI_ResultType = Table
+

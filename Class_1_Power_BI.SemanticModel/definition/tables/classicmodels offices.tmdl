@@ -1,0 +1,111 @@
+table 'classicmodels offices'
+	lineageTag: ff51b7a6-bab6-4405-9626-4318d62fb6d2
+
+	column officeCode
+		dataType: string
+		lineageTag: c455c2bb-f15c-4c7f-9abe-fab9032ae860
+		summarizeBy: none
+		sourceColumn: officeCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 31c3a9da-5de7-48af-a434-61b044fd813b
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: string
+		lineageTag: b4a3891c-d693-4fab-8ed2-5a4dbd1d3dff
+		summarizeBy: none
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column addressLine1
+		dataType: string
+		lineageTag: 44e2ebaa-d241-40a0-a25b-e8cae0af6c7e
+		summarizeBy: none
+		sourceColumn: addressLine1
+
+		annotation SummarizationSetBy = Automatic
+
+	column addressLine2
+		dataType: string
+		lineageTag: d9e4488e-1035-4dcb-9dd1-58672615e664
+		summarizeBy: none
+		sourceColumn: addressLine2
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: d164afa1-aa6f-498c-8a08-f42a4eaa7a95
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: d62d160e-2738-4584-b831-b22950e4e650
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column postalCode
+		dataType: string
+		lineageTag: b2aee296-edd2-4c6a-8876-51151fdacfb9
+		summarizeBy: none
+		sourceColumn: postalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column territory
+		dataType: string
+		lineageTag: e0de2205-dc36-4fa0-9ab0-dd58887d6927
+		summarizeBy: none
+		sourceColumn: territory
+
+		annotation SummarizationSetBy = Automatic
+
+	column officeLocation
+		dataType: string
+		lineageTag: 47cdba14-ff28-4293-a6c8-cf25aecad650
+		summarizeBy: none
+		sourceColumn: officeLocation
+
+		annotation SummarizationSetBy = Automatic
+
+	column region =
+			
+			SWITCH(
+			    TRUE(),
+			    'classicmodels offices'[country] IN {"USA"}, "NA",
+			    'classicmodels offices'[country] IN {"France", "UK"}, "EMEA",
+			    'classicmodels offices'[country] IN {"Japan", "Australia"}, "APAC",
+			    "Other"
+			)
+		lineageTag: 0f9dc0e3-4379-4712-a7ae-9d04443db754
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'classicmodels offices' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("127.0.0.1:3306", "classicmodels", [ReturnSingleDatabase=true]),
+				    classicmodels_offices = Source{[Schema="classicmodels",Item="offices"]}[Data],
+				    #"Removed Blank Rows" = Table.SelectRows(classicmodels_offices, each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null})))
+				in
+				    #"Removed Blank Rows"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
